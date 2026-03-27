@@ -1,0 +1,10 @@
+
+MVI B,17H
+MVI C,09H
+MVI A,000H	
+
+HITU:	   ADD C	
+	   DCR B	
+	   JNZ HITU	
+	   STA 2060	
+	   HLT
