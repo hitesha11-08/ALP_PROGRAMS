@@ -1,0 +1,9 @@
+	   LHLD 2000
+	   MOV A,L
+	   ANI 01
+	   JZ EVEN
+	   MVI A,01
+	   HLT
+
+EVEN:	   MVI A,00
+	   HLT
