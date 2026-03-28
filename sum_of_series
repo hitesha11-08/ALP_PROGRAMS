@@ -1,0 +1,8 @@
+	  MVI B,01H
+                         MVI C,08H
+               LOOP:        ADD B
+                                  INR B
+                                 DCR C
+                               JNZ LOOP
+STA 2026
+HLT
