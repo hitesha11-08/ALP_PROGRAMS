@@ -1,0 +1,20 @@
+	   LXI H,2500
+	   MOV C,M
+	   INX H
+	   LXI SP,2700
+
+PUSH_LOOP:	   MOV A,M
+	   PUSH PSW
+	   INX H
+	   DCR C
+	   JNZ PUSH_LOOP
+	   LXI H,2500
+	   MOV C,M
+	   LXI H,2600
+
+POP_LOOP:	   POP PSW
+	   MOV M,A
+	   INX H
+	   DCR C
+	   JNZ POP_LOOP
+	   HLT
