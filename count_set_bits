@@ -1,0 +1,14 @@
+MVI A,0BH    ; Load the byte directly into A
+MVI B,08H    ; Bit counter (8 bits)
+MVI C,00H    ; 1’s counter
+
+LOOP:
+RRC          ; Rotate right, LSB goes to Carry
+JNC SKIP     ; If Carry = 0, skip increment
+INR C        ; Increment counter
+
+SKIP:
+DCR B        ; Decrement bit counter
+JNZ LOOP     ; Repeat 8 times
+
+HLT          ; Program ends, result in C
