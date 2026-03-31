@@ -1,0 +1,27 @@
+	   LXI H,C050	
+	   MOV C,M	
+	   INX H	
+	   MOV A,M
+	   MOV B,M
+	   MOV D,M
+	   DCR C	
+
+LOOP:	   INX H	
+	   MOV E,M
+	   MOV A,B
+	   CMP E
+	   JNC SKIP_MAX	
+	   MOV B,E	
+
+SKIP_MAX:	   MOV A,D
+	   CMP E
+	   JC SKIP_MIN
+	   MOV D,E	
+
+SKIP_MIN:	   DCR C
+	   JNZ LOOP
+	   LXI H,C060
+	   MOV M,B	
+	   INX H
+	   MOV M,D
+	   HLT
