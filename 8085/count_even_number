@@ -1,0 +1,18 @@
+LXI H,2000H
+MOV C,M
+INX H
+
+MVI B,00H      
+
+LOOP: MOV A,M
+ANI 01H        
+JNZ SKIP       
+INR B           
+
+SKIP: INX H
+DCR C
+JNZ LOOP
+
+MOV A,B
+STA 3000H
+HLT
