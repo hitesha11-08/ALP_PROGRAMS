@@ -1,0 +1,4 @@
+ORG 0000H
+MOV P1,#0FEH      
+SJMP $
+END
