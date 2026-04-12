@@ -1,0 +1,10 @@
+ORG 0000H
+
+DELAY:
+    MOV R5, #200
+D1: MOV R6, #255
+D2: DJNZ R6, D2
+    DJNZ R5, D1
+    RET
+
+END
