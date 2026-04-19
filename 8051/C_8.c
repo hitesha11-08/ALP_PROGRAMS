@@ -1,28 +1,56 @@
-#include<reg51.h>
+#include <reg52.h>
 
-void delay(){
-	unsigned int i,j;
-	for(i=0;i<=200;i++){
-		for(j=0;j<=200;j++){
-		}
-	}
+#define LCD P2
+
+sbit RS = P3^0;
+sbit RW = P3^1;
+sbit EN = P3^2;
+
+void delay() {
+    unsigned int i, j;
+    for(i = 0; i < 500; i++)
+        for(j = 0; j < 123; j++);
 }
 
-int main(){
-	
-	unsigned char pattern = 0xFE;
-	
-	while(1){
-		
-		
-		P1 = pattern;
-		delay();
-		
-		pattern = (pattern << 1) | 0x01;
-		
-		if (pattern == 0xFF){
-			
-			  pattern = 0xFE;
-		}
-	}
+void lcd_cmd(unsigned char cmd) {
+    LCD = cmd;
+    RS = 0;
+    RW = 0;
+    EN = 1;
+    delay();
+    EN = 0;
+}
+
+void lcd_data(unsigned char dat) {
+    LCD = dat;
+    RS = 1;
+    RW = 0;
+    EN = 1;
+    delay();
+    EN = 0;
+}
+
+void lcd_init() {
+    lcd_cmd(0x38); 
+    lcd_cmd(0x0C); 
+    lcd_cmd(0x06);
+    lcd_cmd(0x01); 
+}
+
+void lcd_string(char *str) {
+    while(*str) {
+        lcd_data(*str++);
+    }
+}
+
+void main() {
+    lcd_init();
+
+    lcd_cmd(0x80);        
+    lcd_string("8051");
+
+    lcd_cmd(0xC0);    
+    lcd_string("EMBEDDED");
+
+    while(1);
 }
