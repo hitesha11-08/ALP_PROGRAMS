@@ -7,9 +7,9 @@ sbit RW = P3^1;
 sbit EN = P3^2;
 
 void delay() {
-    unsigned int i, j;
-    for(i = 0; i < 500; i++)
-        for(j = 0; j < 123; j++);
+    unsigned int i,j;
+    for(i=0;i<500;i++)
+        for(j=0;j<123;j++);
 }
 
 void lcd_cmd(unsigned char cmd) {
@@ -30,27 +30,27 @@ void lcd_data(unsigned char dat) {
     EN = 0;
 }
 
-void lcd_init() {
-    lcd_cmd(0x38); 
-    lcd_cmd(0x0C); 
-    lcd_cmd(0x06);
-    lcd_cmd(0x01); 
-}
-
 void lcd_string(char *str) {
     while(*str) {
         lcd_data(*str++);
     }
 }
 
+void lcd_init() {
+    lcd_cmd(0x38);
+    lcd_cmd(0x0C);
+    lcd_cmd(0x06);
+    lcd_cmd(0x01);
+}
+
 void main() {
     lcd_init();
 
-    lcd_cmd(0x80);        
-    lcd_string("8051");
+    lcd_cmd(0x80);           
+    lcd_string("Hitesha M");    
 
-    lcd_cmd(0xC0);    
-    lcd_string("EMBEDDED");
-
-    while(1);
+    while(1) {
+        lcd_cmd(0x18);         
+        delay();
+    }
 }
